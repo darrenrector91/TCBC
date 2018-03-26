@@ -1,0 +1,53 @@
+<div class="admin-view-past-rides-modal" layout="column" ng-animate-ref="edit-admin-modal">
+    <header>
+        <div class="instructions edit-rides-header">
+            <div layout="row" layout-align="end start" style="max-height:0px;">
+                <button ng-click="vm.closeModal()" style="background-color: inherit; color:honeydew; border:none;">
+                    <i class="material-icons">clear</i>
+                </button>
+            </div>
+            <h1 style="text-align:center;">Past Rides</h1>
+        </div>
+    </header>
+    <div layout="row" layout-align="center center">
+        <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp pastTable">
+            <thead>
+                <tr>
+                    <th class="sortable" sortable="date">
+                        <span>Ride Name</span>
+                        <span class="arrow"></span>
+                    </th>
+                    <th style="text-align: center;">
+                        <span>Ride Date</span>
+
+                    </th>
+                    <th sortable='type' class="sortable mdl-data-table__cell--non-numeric">
+                        <span>Checked In</span>
+                        <span class="arrow"></span>
+                    </th>
+                    <th>
+                        <span>Waiver Signed</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="ride in vm.pastMemberRides.list">
+                    <!-- <tr ng-repeat="ride in filtered | startFrom:(paginationOptions.currentPage-1)*paginationOptions.itemsPerPage | limitTo:paginationOptions.itemsPerPage track by $index"> -->
+                    <td style="text-align: center;">{{ride.rides_name}}</td>
+                    <td style="text-align: center;">{{ride.rides_date | date:'MM-dd-yyyy'}}</td>
+                    <td style="text-align: center;">
+                        <span ng-if="ride.checked_in">Yes</span>
+                        <span ng-if="!ride.checked_in">No</span>
+                    </td>
+                    <td style="text-align: center;">
+                        <span ng-if="ride.waiver_signed">Yes</span>
+                        <span ng-if="!ride.waiver_signed">No</span>
+                    </td>
+                    <td>
+                        <md-button class="md-raised md-primary" ng-click="vm.editSinglePastRide(ride)">Past Ride Details</md-button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

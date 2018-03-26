@@ -1,0 +1,47 @@
+<md-dialog flex>
+    <div flex>
+        <header>
+            <div layout="row" layout-align="end start" style="max-height:0px;">
+                <button ng-click="vm.cancel()" style="background-color: inherit; color:honeydew; border:none;">
+                    <i class="material-icons">clear</i>
+                </button>
+            </div>
+            <div class="instructions"></div>
+        </header>
+        <div layout="column" layout-align="center center">
+            <div layout="column" layout-align="space-between center" style="width:100%;">
+                <md-input-container flex style="width:80%;">
+                    <label style="text-align:center;" for="mobile-input-label">Search by first name</label>
+                    <input name="mobile-input" ng-model="vm.searchMemberParams.first_name" />
+                </md-input-container>
+                <md-input-container flex style="width:80%;">
+                    <label style="text-align:center;" for="mobile-input-label">Search by last name</label>
+                    <input name="mobile-input" ng-model="vm.searchMemberParams.last_name" />
+                </md-input-container>
+                <md-input-container flex style="width:80%;">
+                    <label style="text-align:center;" for="mobile-input-label">Search by member ID</label>
+                    <input name="mobile-input" ng-model="vm.searchMemberParams.member_id" />
+                </md-input-container>
+            </div>
+            <md-button type="submit" class="mobile-button md-primary md-raised" ng-click="vm.searchForMember(vm.searchMemberParams)">Search For Member</md-button>
+            <table ng-if="vm.searchMembers.list.length > 0" class="check-in-table">
+                <thead>
+                    <tr>
+                        <th class="mobile-table-head">Member ID</th>
+                        <th class="mobile-table-head">Member Name</th>
+                        <th class="mobile-table-head">Add to ride</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="member in vm.searchMembers.list">
+                        <td class="mobile-member-cell">{{member.member_id}}</td>
+                        <td class="mobile-member-cell">{{member.first_name}} {{member.last_name}}</td>
+                        <td layout="column" layout-align="center center">
+                            <md-button class="mobile-button md-primary md-raised" ng-click="vm.addMemberRider(member)">Add</md-button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</md-dialog>

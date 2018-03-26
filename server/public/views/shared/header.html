@@ -1,0 +1,16 @@
+<md-toolbar class="tool md-whiteframe-z2" ng-controller="LoginController as vm">
+        <div class="md-toolbar-tools">
+                        <img src="/assets/img/tcbc-logo.png" class="logo" alt="Logo">
+                <span layout="column" layout-align="center start">
+                <p class="memberHeaderInfo" style="margin:0; font-size:x-large;" ng-show='vm.user.first_name'>{{vm.user.first_name}}</p>
+                <p class="memberHeaderInfo"  style="margin:0; font-size:small;"ng-show='vm.user.first_name'>Total Mileage: {{vm.myMileage.total.sum}} miles</p>
+                </span>
+                <span flex></span>
+                <md-button class="login" ng-click="vm.logout()">Log Out</md-button>    
+        </div>
+        <div class="nav" ng-show="vm.user.first_name">
+                <div ng-if="vm.user.role === 1" ng-include="'./views/user/partials/nav.html'"></div>
+                <div ng-if="vm.user.role === 2" ng-include="'./views/ride-leader/partials/ride-leader.nav.html'"></div>
+                <div ng-if="vm.user.role === 3" ng-include="'./views/admin/partials/nav.html'"></div>
+        </div>
+</md-toolbar>

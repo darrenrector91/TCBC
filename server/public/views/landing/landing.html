@@ -1,0 +1,143 @@
+<header ng-include="'/views/landing/landing.header.partial.html'"></header>
+<md-content flex layout="row" layout-sm="column" layout-xs="column">
+   <div flex-xs="100" flex-sm="100" flex-gt-sm="80" flex-order="1" layout-padding>
+      <h1 style="text-align:center;">Upcoming Rides for the Twin Cities Bicycle Club</h1>
+      <div flex class="landing-table-container">
+         <div layout="row" flex layout-align="space-between center">
+            <md-input-container class="md-icon-float">
+               <md-icon class="material-icons" md-font-icon>&#xE8B6;</md-icon>
+               <input ng-model="rides_name"
+                  class="md-input"
+                  ng-change="gridActions.filter()"
+                  placeholder="Ride name"
+                  filter-by="rides_name"
+                  filter-type="text"
+                  aria-invalid="false">
+            </md-input-container>
+            <md-input-container class="md-icon-float">
+               <md-icon class="material-icons" md-font-icon>&#xE878;</md-icon>
+               <md-datepicker ng-model="date"
+                  md-hide-icons="calendar"
+                  style="padding-left:30px; width:200px;" flex="100"
+                  md-min-date="vm.minDate"
+                  md-placeholder="Ride date"
+                  is-open="dateToOpened"
+                  ng-click="dateToOpened = true"
+                  filter-by="date"
+                  filter-type="dateTo"
+                  ng-change="gridActions.filter()">
+               </md-datepicker>
+            </md-input-container>
+            <md-input-container class="md-icon-float">
+                    <md-icon class="material-icons" md-font-icon>&#xE52F;</md-icon>
+                    <md-select multiple filter-by="type" filter-type="select" ng-model="type" placeholder="Ride category" ng-change="gridActions.filter();gridActions.refresh()">
+                        <md-option ng-repeat="category in vm.categories.list track by category.type" value="{{category.type}}">
+                            {{category.type}}
+                        </md-option>
+                    </md-select>
+            </md-input-container>
+            <md-button ng-show="date || type || rides_name"
+               class="md-raised md-primary"
+               ng-click="vm.clearFilters()">Clear Filters
+            </md-button>
+         </div>
+         <div grid-data grid-options="gridOptions" grid-actions="gridActions">
+            <table wt-responsive-table>
+               <thead>
+                  <tr>
+                    
+                     <th sortable="date" class="sortable">
+                        <span>Date</span>
+                        <span class="arrow"></span>
+                     </th>
+                     <th sortable="time" class="sortable">
+                        <span>Time</span>
+                        <span class="arrow"></span>
+                     </th>
+                     <th sortable="rides_name" class="name sortable mdl-data-table__cell--non-numeric">
+                            <span>Ride Name</span>
+                            <span class="arrow"></span>
+                         </th>
+                     <th sortable='type' class="sortable">
+                        <span>Category</span>
+                        <span class="arrow"></span>
+                     </th>
+                     <th>
+                        <span>Details</span>
+                     </th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr ng-repeat="ride in filtered | startFrom:(paginationOptions.currentPage-1)*paginationOptions.itemsPerPage | filter: vm.futureFilter | limitTo:paginationOptions.itemsPerPage track by $index">
+                        <td><span>{{ride.date | date: 'MM/DD/YYYY'}}</span></td>
+                        <td><span>{{ride.time}}</span></td>
+                     <td class="name mdl-data-table__cell--non-numeric">
+                        <span>{{ride.rides_name}}</span>
+                     </td>
+                     <td><span>{{ride.type}}</span></td>
+                     <td>
+                        <md-button ng-if="ride.cancelled" class="md-raised cancelled-button" disabled>Cancelled</md-button>
+                        <md-button ng-if="!ride.cancelled" class="md-raised md-primary md-details-button" ng-click="vm.rideDetailReveal(ride)">Details</md-button>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+            <div layout-xs="column" layout="row">
+               <div flex-xs="100" flex-gt-xs="15" layout="row" layout-align-xs="center" layout-align="start center">
+                  <span>{{filtered.length}} total upcoming rides</span>
+               </div>
+               <div flex-xs="100" flex-gt-xs="75" layout="row" layout-align-xs="center" layout-align="end center">
+                  <grid-pagination max-size="5" boundary-links="true" class="pagination" ng-if="paginationOptions.totalItems  > paginationOptions.itemsPerPage"
+                     total-items="paginationOptions.totalItems" ng-model="paginationOptions.currentPage" ng-change="reloadGrid()"
+                     items-per-page="paginationOptions.itemsPerPage"></grid-pagination>
+                  <md-input-container flex-offset-gt-xs="5" class="items-per-page">
+                     <md-select aria-label="Items Per Page" ng-init="paginationOptions.itemsPerPage = '5'" ng-model="paginationOptions.itemsPerPage"
+                        ng-change="reloadGrid()">
+                        <md-option ng-value="5">5</md-option>
+                        <md-option ng-value="10">10</md-option>
+                        <md-option ng-value="25">25</md-option>
+                     </md-select>
+                  </md-input-container>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   </div>
+   </div>
+   <div class="category-key-description" flex-xs="100" flex-sm="100" flex-gt-sm="20" flex-order="2" layout-padding>
+   <h2>Category Key</h2>
+   <p>Click on a Category to Learn More!</p>
+   <md-content>
+      <div class="md-accordion" ng-repeat="category in vm.categories.list">
+      <md-toolbar ng-init="category.expanded = false" class="category-open" ng-click="vm.toggleView(vm.categories.list, category, $index)">
+         <div class="md-toolbar-tools">
+            <h2>{{category.type}} - {{category.name}}</h2>
+            <div ng-class="{expandCollapse:true, active:category.expanded}"></div>
+            <span flex></span>
+            <i ng-show="!category.expanded" class="material-icons">keyboard_arrow_down</i>
+            <i ng-show="category.expanded" class="material-icons">keyboard_arrow_up</i>
+         </div>
+      </md-toolbar>
+      <div style="overflow:scroll" ng-class="{dataContent:true, activeContent:category.expanded}">
+         <div style="padding:10px">
+            <p>
+               <span class="bold">Description:</span> {{category.category_description}}
+            </p>
+            <p>
+               <span class="bold">Min. Average Speed:</span> {{category.notes}}
+            </p>
+            <p>
+               <span class="bold">Riders Must Have:</span> {{category.riders_must_have}}
+            </p>
+            <p>
+               <span class="bold">Rest Stops:</span> {{category.rest_stops}}
+            </p>
+            <p>
+               <span class="bold">Leader Rides:</span> {{category.ride_leader_notes}}
+            </p>
+         </div>
+      </div>
+      <div>
+   </md-content>
+</md-content>

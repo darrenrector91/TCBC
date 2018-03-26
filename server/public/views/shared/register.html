@@ -1,0 +1,32 @@
+<div class="register-modal">
+    <div class="instructions slim">
+        <h1>Register</h1>
+    </div>
+    <div layout="column" layout-align="center center" flex ng-cloak>
+        <!-- <h2 style="text-align:center;">In order to register you must be a TCBC member and know your member ID</h2>
+        <h2>Contact ... or go to ... for more information</h2> -->
+        <form class="login-register-form">
+            <md-input-container class="md-icon-float md-block">
+                <label>Enter your Member ID</label>
+                <input ng-model="vm.newUser.member_id" type="text" required/>
+            </md-input-container>
+            <md-input-container class="md-icon-float md-block">
+                <label>Choose a Password</label>
+                <input ng-model="vm.newUser.password1" type="password" required>
+                <span ng-show="!vm.passwordMatch.state" class="password-matcher">Passwords must match!</span>
+
+            </md-input-container>
+            <md-input-container class="md-icon-float md-block">
+                <label>Re-enter chosen Password</label>
+                <input ng-model="vm.newUser.password2" type="password" required>
+                <span ng-show="!vm.passwordMatch.state" class="password-matcher">Passwords must match!</span>
+
+            </md-input-container>
+            <p class="lead alert alert-danger" role="alert" ng-if="vm.message.message != ''" ng-bind-html="vm.message.message"></p>
+            <div layout="row">
+                <md-button class="md-accent " ng-click="vm.cancel()"> Cancel </md-button>
+                <md-button class="md-primary  md-raised " ng-click="vm.register(vm.newUser)" type="submit"> Register </md-button>
+            </div>
+        </form>
+    </div>
+</div>

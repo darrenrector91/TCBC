@@ -1,0 +1,34 @@
+<md-dialog flex="50">
+    <div class="ride-detail-modal" layout="column" style="height:100%; width:100%;">
+        <header ng-include="'/views/shared/ride-detail-header.html'"></header>
+        <div layout="row" layout-align="space-around center" style="height:100%; padding:20px;" >
+            <div flex layout="column" layout-align="center center">
+                <h2>Category</h2>
+                <!-- need to grab category info -->
+                <p>{{vm.ride.type}} - {{vm.ride.name}}</p>
+                <h2>Ride Leader</h2>
+                <!-- need to grab ride leader info -->
+                <p>{{vm.ride.first_name}} {{vm.ride.last_name}}</p>
+                <h2>Location</h2>
+                <p>{{vm.ride.ride_location}}</p>
+            </div>
+            <div flex layout="column" layout-align="center center">
+                <h2>GPS Link</h2>
+                <p>
+                    <a ng-href="{{vm.ride.url}}">{{vm.ride.url}}</a>
+                </p>
+                <h2>Description</h2>
+                <p class="ride-details-description">{{vm.ride.description}}</p>
+
+                <h2>Distance</h2>
+                <p>{{vm.ride.distance}} mi</p>
+            </div>
+        </div>
+
+        <div layout layout-align="center center">
+            <div>
+                <md-button ng-if="!vm.ride.past_ride && !vm.ride.leadingRide" ng-click="vm.rideUnregister(vm.ride)" class="md-primary md-raised">Remove me from this ride</md-button>
+            </div>
+        </div>
+    </div>
+</md-dialog>

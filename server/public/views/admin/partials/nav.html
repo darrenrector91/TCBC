@@ -1,0 +1,38 @@
+<md-content  ng-controller="NavController as vm">
+  <md-nav-bar aria-label="admin-nav-bar" md-selected-nav-item="vm.currentNavItem.value" md-no-ink-bar> 
+    <div flex layout="row" layout-align="space-around center" style="height: -webkit-fill-available;width: -webkit-fill-available;">
+      <md-nav-item aria-label="admin-nav-item-home" md-nav-href="#!/home" value="home" name="home" ng-class="{active: vm.activetab == 'home'}">
+        Home
+      </md-nav-item>
+      <md-nav-item aria-label="admin-nav-item-my-rides" md-nav-href="#!/ride-leader/my-rides" name="my-rides">
+        My Rides
+      </md-nav-item>
+      <md-nav-item aria-label="admin-nav-item-my-profile" md-nav-href="#!/my-profile" name="my-profile">
+        My Profile
+      </md-nav-item>
+      <md-nav-item aria-label="admin-nav-item-admin" md-nav-click="goto('page1')" ng-click="vm.toggle=!vm.toggle" name="admin">
+        <md-menu md-offset="16 64">
+          <md-button aria-label="admin-options-button" ng-click="$mdMenu.open($event)">
+            Admin
+          </md-button>
+          <md-menu-content>
+            <md-menu-item>
+              <md-button>
+                <a ng-href="#!/manage-members" style="text-decoration:none;">
+                  Manage Members
+                </a>
+              </md-button>
+            </md-menu-item>
+            <md-menu-item> 
+              <md-button>
+                <a ng-href="#!/manage-rides" style="text-decoration:none;">
+                  Manage Rides
+                </a>
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+      </md-nav-item>
+    </div>
+  </md-nav-bar>
+</md-content>

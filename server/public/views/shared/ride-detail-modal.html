@@ -1,0 +1,37 @@
+<md-dialog flex="50">
+
+    <div class="ride-detail-modal" layout="column" style="height:100%; width:100%;">
+        <header ng-include="'/views/shared/ride-detail-header.html'" ></header>
+        <div layout="row" layout-align="space-between strech" style="padding:20px;">
+            <div class="ride-detail-stuff">
+                <h2>Category</h2>
+                <!-- need to grab category info -->
+                <p>{{vm.ride.type}} - {{vm.ride.name}}</p>
+                <h2>Ride Leader</h2>
+                <!-- need to grab ride leader info -->
+                <p>{{vm.ride.first_name}} {{vm.ride.last_name}}</p>
+                <h2>Location</h2>
+                <p>{{vm.ride.ride_location}}</p>
+                <h2>GPS Link</h2>
+                <p>
+                    <a ng-href="{{vm.ride.url}}">{{vm.ride.url}}</a>
+                </p>
+            </div>
+            <div class="ride-detail-stuff" >
+                <h2>Description</h2>
+                <p class="ride-details-description">{{vm.ride.description}}</p>
+
+                <h2>Distances Offered (Miles)</h2>
+                <md-select ng-if="vm.user.member_id" ng-model="vm.selectedDistance">
+                    <md-option ng-repeat="distance in vm.ride.distanceSelection" ng-value="distance.rides_distances_id">
+                        {{distance.ride_distance}} mi
+                    </md-option>
+                </md-select>
+                <span ng-if="!vm.user.member_id">
+                    <p ng-repeat="distance in vm.ride.distanceSelection">{{distance.ride_distance}} mi</p>
+                </span>
+                <md-button class="md-primary md-raised" ng-click="vm.rideSignUp(vm.ride)">Sign Up for ride!</md-button>
+            </div>
+        </div>
+    </div>
+</md-dialog>

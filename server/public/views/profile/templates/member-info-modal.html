@@ -1,0 +1,74 @@
+<header>
+    <div class="instructions" id="profileInfo">
+        Member Information
+    </div>
+</header>
+<div class="profileContainer" layout="column" center>
+    <div layout="column" class="profileLayout" layout-align="center center">
+        <md-content class="profileInfo">
+            <div layout-gt-sm="row">
+                <label class="profileLabel">
+                    Member id:
+                </label>
+                <label class="profileUserDataLabel" ng-disabled="true">{{vm.viewProfile.member_id}}</label>
+            </div>
+            <div layout-gt-sm="row">
+                <label class="profileLabel">
+                    First name:
+                </label>
+                <label class="profileUserDataLabel" ng-disabled="true">{{vm.viewProfile.first_name}}</label>
+            </div>
+            <div layout-gt-sm="row">
+                <label class="profileLabel">
+                    Last name:
+                </label>
+                <label class="profileUserDataLabel" ng-disabled="true">{{vm.viewProfile.last_name}}</label>
+            </div>
+            <div layout-gt-sm="row">
+                <label class="profileLabel">
+                    City:
+                </label>
+                <label class="profileUserDataLabel" ng-disabled="true">{{vm.viewProfile.city}}</label>
+            </div>
+            <div layout-gt-sm="row">
+                <label class="profileLabel">
+                    State:
+                </label>
+                <label class="profileUserDataLabel" ng-disabled="true">{{vm.viewProfile.state}}</label>
+            </div>
+            <div layout-gt-sm="row">
+                <label class="profileLabel">
+                    Zip:
+                </label>
+                <label class="profileUserDataLabel" ng-disabled="true">{{vm.viewProfile.zip}}</label>
+            </div>
+            <div layout-gt-sm="row">
+                <label class="profileLabel">
+                    Phone Number:
+                </label>
+                <label class="profileUserDataLabel" ng-disabled="true">{{vm.viewProfile.phone_1}}</label>
+            </div>
+            <div layout-gt-sm="row">
+                <label class="profileLabel">
+                    Email:
+                </label>
+                <label class="profileUserDataLabel" ng-disabled="true">{{vm.viewProfile.email}}</label>
+            </div>
+            <div layout-gt-sm="row">
+                <label class="profileLabel">
+                    Membership expiration:
+                </label>
+                <label class="profileUserDataLabel" ng-disabled="true">{{vm.viewProfile.membership_expiration | date:'MM-dd-yyyy'}}</label>
+            </div>
+            <div layout-gt-sm="row" class="profileLink">
+                <a ng-href=" http://www.biketcbc.org/index.php/current-members/manage-my-membership">Update contact information</a>
+            </div>
+            <div layout="row" flex>
+                <span flex></span>
+                <md-button class="md-raised" ng-click="vm.close()">close</md-button>
+                <span flex></span>
+            </div>
+        </md-content>
+
+    </div>
+</div>

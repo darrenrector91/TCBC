@@ -1,0 +1,24 @@
+<div class="login-modal">
+    <div class="instructions slim">
+        <h1>Log In</h1>
+    </div>
+    <div layout="column" flex layout-align="center center" ng-cloak>
+            <form class="login-register-form" >
+                <md-input-container class="md-icon-float md-block">
+                    <label>Member ID</label>
+                    <input ng-model="vm.user.member_id" type="text" required/>
+
+                </md-input-container>
+                <md-input-container class="md-icon-float md-block">
+                    <label>Password</label>
+
+                    <input ng-model="vm.user.password" type="password" required>
+                </md-input-container>
+                <p class="lead alert alert-danger" role="alert" ng-if="vm.message != ''">{{vm.message}}</p>
+                <div layout="row">
+                    <md-button class="md-accent" ng-click="vm.cancel()"> Cancel </md-button>
+                    <md-button class="md-primary  md-raised " ng-click="vm.login(vm.user)" type="submit"> Log In </md-button>
+                </div>
+            </form>
+    </div>
+</div>

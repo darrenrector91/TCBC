@@ -1,0 +1,24 @@
+<md-toolbar ng-controller="LoginController as vm">
+        <div class="md-toolbar-tools">
+                <div flex="50">
+                        <img src="/assets/img/tcbc-logo.png" class="logo" alt="Logo">
+                </div>
+                <div flex="50">
+                        <div layout="column">
+                                <div layout="row" layout-align="end center">
+                                        <md-button id="register" class="md-raised md-secondary" ng-click="vm.registerModal()"> Register </md-button>
+                                        <md-button id="login" ng-click="vm.loginModal()">Log In</md-button>
+                                </div>
+                        </div>
+                        <div layout="column">
+                                <div layout="row" layout-align="end center">
+                                        <a href="http://www.biketcbc.org/index.php/join-us/become-a-member" class="tcbc-join" target="_blank">Become a TCBC Member</a>
+                                </div>
+                        </div>
+                </div>
+                </div>
+                <div class="nav" ng-show="vm.user.first_name">
+                        <div ng-if="vm.user.role === 1 || vm.user.role === 2" ng-include="'./views/user/partials/nav.html'"></div>
+                        <div ng-if="vm.user.role === 3" ng-include="'./views/admin/partials/nav.html'"></div>
+                </div>
+</md-toolbar>

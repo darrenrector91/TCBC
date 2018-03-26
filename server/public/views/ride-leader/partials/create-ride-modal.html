@@ -1,0 +1,65 @@
+<md-dialog flex="60" layout style="height:50vh;">
+    <div class="ride-detail-modal" layout="column" flex="100" style="height:42vh;">
+        <header>
+            <div class="instructions">
+                <div layout="row" layout-align="end start">
+                    <md-icon style="color:honeydew;" class="material-icons" md-font-icon>&#xE52F;</md-icon>
+                    <span flex></span>
+                    <p class="create-ride-header">Create a Ride</p>
+                    <span flex></span>
+                    <button ng-click="vm.closeModal()" style="background-color: inherit; color:honeydew; border:none;">
+                        <i class="material-icons">clear</i>
+                    </button>
+                </div>
+            </div>
+        </header>
+        <form class="simple-form">
+            <div layout="row" layout-align="space-between strech">
+                <div class="ride-detail-stuff">
+                    <md-input-container>
+                        <label for="ride-name-input">Ride Name</label>
+                        <input class="create-ride-input" name="ride-name-input" ng-model="vm.newRide.rides_name" required />
+                    </md-input-container>
+                    <md-input-container>
+                        <label for="ride-date-input">Ride date</label>
+                        <input class="create-ride-input" type="datetime-local" name="ride-date-input" ng-model="vm.newRide.rides_date" required/>
+                    </md-input-container>
+                    <md-input-container>
+                        <label>Category</label>
+                        <md-select ng-model="vm.newRide.rides_category">
+                            <md-option ng-repeat="category in vm.categories.list" ng-value="category.id">
+                                {{category.type}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                    <md-input-container>
+                        <label for="location-input">Location</label>
+                        <input class="create-ride-input" name="location-input" ng-model="vm.newRide.ride_location" required />
+                    </md-input-container>
+                    <md-input-container>
+                        <label for="gps-link-input">GPS Link</label>
+                        <input class="create-ride-input" name="gps-link-input" ng-model="vm.newRide.url" />
+                    </md-input-container>
+                    <md-content>
+                        <label>Add Distances (miles):
+                            <span class="numbers-only">Numbers only</span>
+                        </label>
+                        <md-chips ng-model="vm.newRide.distances" placeholder="type and press enter" md-max-chips="7"></md-chips>
+                    </md-content>
+
+                </div>
+                <div class="ride-detail-stuff" flex="40" layout="column" layout-align="center space-between">
+                    <md-input-container>
+                        <!-- style="margin-left:27px;" -->
+                        <label for="description-input">Description</label>
+                        <textarea name="description-input" ng-model="vm.newRide.description" rows="5" style="height:100px;" required></textarea>
+                    </md-input-container>
+                    <div>
+                        <span flex></span>
+                        <md-button ng-click="vm.submitRide(vm.newRide)" type="submit" class="md-raised md-warn" style="float:right"> Submit ride for approval</md-button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</md-dialog>

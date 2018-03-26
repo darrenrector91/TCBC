@@ -1,0 +1,29 @@
+<header ng-include="'/views/shared/header.html'"></header>
+<div layout ="row" style="padding:10px">
+    
+    <span flex></span>
+</div>
+<div class="profile-page-container" layout="column">
+    <div class="graph-container" layout="row">
+        <div class="goalChart" layout="column" flex=50>
+            <div id="bigfella" class="goal-dial"></div>
+            <div class="set-goal">
+                <div class="goal-container">          
+                    <md-input-container >    
+                        <label for=""> Set Goal: </label>
+                        <input type="number" ng-model="vm.goal.setGoal" >
+                    </md-input-container>
+                    <md-button class="md-primary md-raised" ng-click="vm.setGoal(vm.goal)">Confirm Goal</md-button>
+                </div>
+            </div>     
+        </div>  
+        <div class="lineChart" flex=50 layout="column">
+            <canvas id="lineChart"></canvas>            
+        </div>
+    </div>
+    <div class="profile-btn" layout="row" layout-align="center" flex>
+        
+        <md-button class="md-warn md-raised" ng-click="vm.openMemberInfo()">View My Member Info</md-button>
+        
+    </div>
+</div>

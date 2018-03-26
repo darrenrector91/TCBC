@@ -1,0 +1,102 @@
+<header ng-include="'/views/shared/header.html'"></header>
+
+<div>
+    <div>
+        <h2>My upcoming rides
+            <md-button ng-click="vm.collapseMyRides()" ng-if="!vm.myRidesTable">
+                <i class="material-icons">keyboard_arrow_down</i>
+            </md-button>
+            <md-button ng-click="vm.collapseMyRides()" ng-if="vm.myRidesTable">
+                <i class="material-icons">keyboard_arrow_up</i>
+            </md-button>
+        </h2>
+        <table wt-responsive-table ng-show="vm.myRidesTable">
+            <thead>
+                <tr>
+                    <th style="text-align: center;" class="sortable" sortable="date">
+                        <span>Date</span>
+                        <span class="arrow"></span>
+                    </th>
+                    <th style="text-align: center;">
+                        <span>Time</span>
+                    </th>
+                    <th sortable="rides_name" class="sortable mdl-data-table__cell--non-numeric">
+                        <span>Name</span>
+                        <span class="arrow"></span>
+                    </th>
+                    <th style="text-align: center;">
+                        <span>Details</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="ride in vm.myRides.list | startFrom:(paginationOptions.currentPage-1)*paginationOptions.itemsPerPage | limitTo:paginationOptions.itemsPerPage track by $index"
+                    ng-class="{'cancelled-ride': ride.cancelled}">
+                    <td style="text-align: center;">{{ride.date | date : 'short'}} </td>
+                    <td style="text-align: center;">{{ride.time}}</td>
+                    <td style="text-align: left;">{{ride.rides_name}}</td>
+                    <td style="text-align: center;">
+                        <md-button class="md-raised md-primary" ng-click="vm.rideDetailReveal(ride)">Details</md-button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <br>
+    <br>
+    <div ng-if="vm.myPastRides.list.length > 0">
+        <h2>My past rides
+            <md-button ng-click="vm.collapsePastRides()" ng-if="!vm.pastRidesTable">
+                <i class="material-icons">keyboard_arrow_down</i>
+            </md-button>
+            <md-button ng-click="vm.collapsePastRides()" ng-if="vm.pastRidesTable">
+                <i class="material-icons">keyboard_arrow_up</i>
+            </md-button>
+        </h2>
+        <table wt-responsive-table  ng-show="vm.pastRidesTable">
+            <thead>
+                <tr>
+                    <th style="text-align: center;" class="sortable" sortable="date">
+                        <span>Date</span>
+                        <span class="arrow"></span>
+                    </th>
+                    <th style="text-align: center;">
+                        <span>Time</span>
+                    </th>
+                    <th sortable="rides_name" class="sortable mdl-data-table__cell--non-numeric">
+                        <span>Name</span>
+                        <span class="arrow"></span>
+                    </th>
+                    <th style="text-align: center;">
+                        <span>Details</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="ride in vm.myPastRides.list | startFrom:(paginationOptions.currentPage-1)*paginationOptions.itemsPerPage | limitTo:paginationOptions.itemsPerPage track by $index"
+                    ng-class="{'cancelled-ride': ride.cancelled}">
+                    <td style="text-align: center;">{{ride.date | date : 'short'}} </td>
+                    <td style="text-align: center;">{{ride.time}}</td>
+                    <td style="text-align: left;">{{ride.rides_name}}</td>
+                    <td style="text-align: center;">
+                        <md-button class="md-raised md-primary" ng-click="vm.rideDetailRevealPast(ride)">Details</md-button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- <div flex="75" layout="row" layout-align-xs="end end" layout-align="end center">
+            <grid-pagination max-size="5" boundary-links="true" class="pagination" ng-if="paginationOptions.totalItems  > paginationOptions.itemsPerPage"
+                total-items="paginationOptions.totalItems" ng-model="paginationOptions.currentPage" ng-change="reloadGrid()"
+                items-per-page="paginationOptions.itemsPerPage"></grid-pagination>
+            <md-input-container flex-offset-gt-xs="5" class="items-per-page">
+                <md-select aria-label="Items Per Page" ng-init="paginationOptions.itemsPerPage = '5'" ng-model="paginationOptions.itemsPerPage"
+                    ng-change="reloadGrid()">
+                    <md-option ng-value="5">5</md-option>
+                    <md-option ng-value="10">10</md-option>
+                    <md-option ng-value="25">25</md-option>
+                </md-select>
+            </md-input-container>
+            </div> -->
+        <!-- </div> -->
+    </div>
+</div>

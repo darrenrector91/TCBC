@@ -1,0 +1,60 @@
+<md-dialog flex>
+    <div class="ride-detail-modal" layout="column" style="height:100%; width:100%;">
+        <header>
+            <!-- <div layout="row" layout-align="end start" style="max-height:0px;">
+                <button ng-click="vm.closeModal()" style="background-color: inherit; color:honeydew; border:none;">
+                    <i class="material-icons">clear</i>
+                </button>
+            </div> -->
+            <div class="instructions">
+                Edit This Ride
+            </div>
+        </header>
+        <div layout="row" layout-align="space-between strech" class="edit-ride-modal">
+            <div class="ride-detail-stuff">
+                <md-input-container>
+                    <label for="ride-name-input">Ride Name</label>
+                    <input name="ride-name-input" ng-model="vm.rideToEdit.rides_name" />
+                </md-input-container>
+                <md-input-container>
+                    <label for="ride-date-input">Ride date</label>
+                    <input type="datetime-local" name="ride-date-input" ng-model="vm.rideToEdit.rides_date" />
+                </md-input-container>
+                <md-input-container>
+                    <label>Category</label>
+                    <md-select ng-model="vm.rideToEdit.rides_category">
+                        <md-option ng-repeat="category in vm.categories.list" ng-value="category.id">
+                            {{category.type}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container>
+                    <label for="location-input">Location</label>
+                    <input name="location-input" ng-model="vm.rideToEdit.ride_location" />
+                </md-input-container>
+                <md-input-container>
+                    <label for="gps-link-input">GPS Link</label>
+                    <input name="gps-link-input" ng-model="vm.rideToEdit.url" />
+                </md-input-container>
+                <md-input-container>
+                    <label for="distance-input">Distances</label>
+                    <md-chips ng-model="vm.rideToEdit.ride_distance"></md-chips>
+
+                </md-input-container>
+            </div>
+            <div class="ride-detail-stuff" flex="40" layout="column" layout-align="center space-between">
+                <md-input-container>
+                    <!-- style="margin-left:27px;" -->
+                    <label for="description-input">Description</label>
+                    <textarea name="description-input" ng-model="vm.rideToEdit.description" rows="5" style="height:100px;"></textarea>
+                </md-input-container>
+                <div>
+                    <!-- style="margin-right:59px;" -->
+                    <md-button class="md-primary md-raised" ng-click="vm.approveAndSave(vm.rideToEdit)">Approve and Save</md-button>
+                    <md-button class="md-primary md-raised" ng-click="vm.cancel()"> Cancel</md-button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</md-dialog>

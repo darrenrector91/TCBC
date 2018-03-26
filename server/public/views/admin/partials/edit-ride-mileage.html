@@ -1,0 +1,32 @@
+<div layout="column" ng-animate-ref="edit-admin-modal">
+    <header>
+        <div class="instructions edit-rides-header">
+            <div layout="row" layout-align="start start" style="max-height:0px;">
+                <button ng-click="vm.backModal()" style="background-color: inherit; color:honeydew; border:none;">
+                    <i class="material-icons md-48">arrow_back</i>
+                </button>
+            </div>
+            <div layout="column" layout-align="center center">
+                <h1>{{vm.member.first_name}} {{vm.member.last_name}}'s ride</h1>
+            </div>
+        </div>
+    </header>
+    <div layout="row" layout-align="space-around strech">
+        <div class="ride-detail-stuff">
+            <h2>Location</h2>
+            <p>{{vm.ride.ride_location}}</p>
+            <h2>Ride Name</h2>
+            <p>{{vm.ride.rides_name}}</p>
+            <h2>Ride Date</h2>
+            <p>{{vm.ride.rides_date | date : 'short'}}</p>
+        </div>
+        <div class="ride-detail-stuff" layout="column" layout-align="center center">
+            <h2>Distance</h2>
+            <md-input-container>
+                <label for="actual-distance">Edit Distance Ridden</label>
+                <input name="actual-distance" ng-model="vm.ride.actual_distance" />
+            </md-input-container>
+            <md-button class="md-raised md-primary" ng-click="vm.editRideActualMileage(vm.ride.actual_distance)">Save new mileage</md-button>
+        </div>
+    </div>
+</div>

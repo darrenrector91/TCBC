@@ -1,0 +1,105 @@
+<header ng-include="'/views/shared/header.html'"></header>
+<div class="ride-leader-my-rides-container">
+  <div layout="row" layout-align="center center" style="min-height: 200px">
+    <md-input-container class="md-block" flex-gt-sm>
+      <label>First Name</label>
+      <input ng-model="vm.rider.first_name">
+    </md-input-container>
+    <md-input-container class="md-block" flex-gt-sm>
+      <label>Last Name</label>
+      <input ng-model="vm.rider.last_name">
+    </md-input-container>
+    <md-input-container class="md-block" flex-gt-sm>
+      <label>Member ID</label>
+      <input ng-model="vm.rider.member_id">
+    </md-input-container>
+    <md-input-container class="md-block" flex-gt-sm>
+      <md-button class="md-raised md-primary logout" ng-click="vm.findRider(vm.rider)">Submit</md-button>
+    </md-input-container>
+  </div>
+  <div layout="row" layout-align="center center">
+    <table wt-responsive-table>
+      <thead>
+        <tr>
+          <th class="sortable" sortable="date" style="text-align: center;">
+            <span>First Name</span>
+            <span class="arrow"></span>
+          </th>
+          <th style="text-align: center;">
+            <span>Last Name</span>
+
+          </th>
+          <th sortable="rides_name" class="sortable mdl-data-table__cell--non-numeric" style="text-align: center;">
+            <span>Member ID</span>
+            <span class="arrow"></span>
+          </th>
+          <!-- <th sortable='type' class="sortable mdl-data-table__cell--non-numeric">
+            <span>Current Role</span>
+            <span class="arrow"></span>
+          </th> -->
+          <th style="text-align: center;">
+            <span>Update Role</span>
+          </th>
+          <th style="text-align: center;">
+            <span>Rides</span>
+          </th>
+          <th style="text-align: center;">
+            <span >Change Password</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="member in vm.riderInfo.list">
+          <!-- <tr ng-repeat="ride in filtered | startFrom:(paginationOptions.currentPage-1)*paginationOptions.itemsPerPage | limitTo:paginationOptions.itemsPerPage track by $index"> -->
+          <td style="text-align: center;">{{member.first_name}}</td>
+          <td style="text-align: center;">{{member.last_name}}</td>
+          <td style="text-align: center;">{{member.member_id}}</td>
+          <td style="text-align: center;"> 
+            <md-select ng-if="member.role_id != 4" placeholder="{{member.role}}" ng-model="member.role">
+              <md-option ng-repeat="roles in vm.getUserRoles.list" ng-value="roles">{{roles.role}}</md-option>
+            </md-select>
+            <md-button ng-if="member.role_id != 4" class="md-raised md-primary" ng-click="vm.changeRole(member)">Submit</md-button>
+            <span ng-if="member.role_id == 4">{{member.role}}</span>
+          </td>
+          <td style="text-align: center;">
+            <md-button class="md-raised md-primary" ng-click="vm.adminViewMemberPastRides(member)">View</md-button>
+          </td>
+          <td style="text-align: center;">
+            <md-button class="md-raised md-primary" ng-click="vm.openChangePasswordModal(ev,member)">Change Password</md-button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div> 
+
+<!-- <form name="myForm" class="csvUpload" layout-align="center center">
+  <label> Upload Member Information - CSV File</label>
+<br>
+  <label class="md-raised md-primary md-button bring-forward" md-ink-ripple for="file">
+      <span>Select File</span>
+ </label>
+ <input type="file" ngf-select ng-model="file" name="file" id="file" class="file-input-hide" ngf-pattern="'.csv'"
+ accept=".csv" ngf-max-size="20MB" ngf-model-invalid="errorFile">
+ <i ng-show="myForm.file.$error.maxSize">File too large {{errorFile.size / 1000000|number:1}}MB: max 20MB</i>
+ <img ng-show="myForm.file.$valid" ngf-thumbnail="file">
+ <br>
+  <md-button class="md-raised md-primary" ng-disabled="!file" ng-click="vm.submit(vm.file)">Submit</md-button>
+  <md-button class="md-raised md-warn" ng-click="file = null" ng-show="file">Remove</md-button>
+</form> -->
+
+
+
+<form name="myForm" class="csvUpload" layout-align="center center">
+  <md-button class="md-icon-button" aria-label="More" type="file" ngf-select ng-model="vm.file" name="file" ngf-pattern="'.csv'"
+    accept=".csv" ngf-max-size="20MB" ngf-model-invalid="errorFile">
+    <i class="material-icons md-24">add_circle_outline</i>
+  </md-button>
+  <label> Upload Member Information - CSV File</label>
+  <i ng-show="myForm.file.$error.maxSize">File too large {{errorFile.size / 1000000|number:1}}MB: max 20MB</i>
+  <img ng-show="myForm.file.$valid" ngf-thumbnail="file">
+  <br>
+  <md-button class="md-raised md-primary" ng-disabled="!myForm.$valid" ng-click="vm.submit(vm.file)">Submit</md-button>
+  <br>
+  <md-button class="md-warn" ng-click="file = null" ng-show="file">Remove</md-button>
+</form>

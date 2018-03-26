@@ -1,0 +1,6 @@
+<md-dialog flex style=" min-height:60%;">
+    <div class="past-rides-modal" style="height:100%; width:100%;">
+        <div class="slide-animation" ng-if="vm.mode.show" ng-include="'./views/admin/partials/view-member-past-rides-modal.html'"></div>
+        <div class="slide-animation-back" ng-if="vm.mode.edit" ng-include="'./views/admin/partials/edit-ride-mileage.html'"></div>
+    </div>
+</md-dialog>

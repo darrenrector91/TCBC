@@ -1,0 +1,9 @@
+<div class="instructions" >
+    <div layout="row" layout-align="end start" style="max-height:0px;"><button ng-click="vm.closeModal()" style="background-color: inherit; color:honeydew; border:none;"><i class="material-icons">clear</i></button></div>
+        <h1 class="lead">{{vm.ride.rides_name}} </h1>
+        <div layout="row" layout-align="space-around center">
+            <span>
+                <h2>When: {{vm.ride.rides_date | date : 'medium'}}</h2>
+            </span>
+    </div>
+</div>
